@@ -1,0 +1,23 @@
+Create the install-config.yaml file:
+
+
+./openshift-install create install-config --dir=<installation_directory>
+
+
+generate the Kubernetes manifests for the cluster:
+
+ ./openshift-install create manifests --dir=<installation_directory>
+ 
+ Extracting the infrastructure name:
+ 
+ (install jq from epel-release repo)
+ jq -r .infraID <installation_directory>/metadata.json
+ 
+ Example output: openshift-vw9j6
+ 
+ create the Ignition configuration files:
+ 
+ /openshift-install create ignition-configs --dir=<installation_directory>
+ 
+ 
+ 
