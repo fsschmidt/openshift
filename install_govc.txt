@@ -1,0 +1,9 @@
+curl -L https://github.com/vmware/govmomi/releases/download/v0.24.0/govc_linux_amd64.gz | gunzip > /usr/local/bin/govc
+chmod +x /usr/local/bin/govc
+# Host do vSphere
+export GOVC_URL=vSphere.meudominio.com.br
+# Credenciais
+export GOVC_USERNAME=myuser
+export GOVC_PASSWORD=MyP4ss
+# Aceitar certificados auto-assinados
+export GOVC_INSECURE=true
