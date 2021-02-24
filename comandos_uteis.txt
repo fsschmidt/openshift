@@ -19,5 +19,7 @@ generate the Kubernetes manifests for the cluster:
  
  /openshift-install create ignition-configs --dir=<installation_directory>
  
+ For debugging you can use sudo crictl ps and sudo crictl logs <container_id> to inspect the state of the various components.
+ 
  
  
