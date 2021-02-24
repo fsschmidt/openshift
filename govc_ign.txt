@@ -1,0 +1,81 @@
+---
+
+# Host do vSphere
+export GOVC_URL=server.domain.com
+# Credenciais
+export GOVC_USERNAME=user
+export GOVC_PASSWORD=pass
+# Aceitar certificados auto-assinados
+export GOVC_INSECURE=true
+
+
+---
+POC-OpenShift-bootstrap
+
+govc vm.change -vm "POC-OpenShift-bootstrap" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-bootstrap" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-bootstrap" -e guestinfo.ignition.config.data="$(cat append-bootstrap.ign | base64 -w0)"
+export IPCFG="ip=192.168.0.211::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-bootstrap" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+
+---
+
+POC-OpenShift-control-plane1
+
+govc vm.change -vm "POC-OpenShift-control-plane1" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-control-plane1" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-control-plane1" -e guestinfo.ignition.config.data="$(cat master.ign | base64 -w0)"
+export IPCFG="ip=192.168.0.212::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-control-plane1" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}" 
+
+
+---
+
+POC-OpenShift-control-plane2
+
+govc vm.change -vm "POC-OpenShift-control-plane2" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-control-plane2" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-control-plane2" -e "guestinfo.ignition.config.data=$(cat master.ign | base64 -w0)" 
+export IPCFG="ip=192.168.0.213::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-control-plane2" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+
+---
+
+POC-OpenShift-control-plane3
+
+govc vm.change -vm "POC-OpenShift-control-plane3" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-control-plane3" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-control-plane3" -e "guestinfo.ignition.config.data=$(cat master.ign | base64 -w0)" 
+export IPCFG="ip=192.168.0.214::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-control-plane3" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+
+---
+
+POC-OpenShift-compute1
+
+
+govc vm.change -vm "POC-OpenShift-compute1" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-compute1" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-compute1" -e "guestinfo.ignition.config.data=$(cat worker.ign | base64 -w0)" 
+export IPCFG="ip=192.168.0.215::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-compute1" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+
+---
+
+POC-OpenShift-compute2
+
+govc vm.change -vm "POC-OpenShift-compute2" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-compute2" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-compute2" -e "guestinfo.ignition.config.data=$(cat worker.ign | base64 -w0)" 
+export IPCFG="ip=192.168.0.216::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-compute2" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
+
+---
+
+POC-OpenShift-compute3
+
+govc vm.change -vm "POC-OpenShift-compute3" -e "guestinfo.ignition.config.data.encoding=base64"
+govc vm.change -vm "POC-OpenShift-compute3" -e "disk.EnableUUID=TRUE"
+govc vm.change -vm "POC-OpenShift-compute3" -e "guestinfo.ignition.config.data=$(cat worker.ign | base64 -w0)" 
+export IPCFG="ip=192.168.0.217::192.168.0.1:255.255.255.0:::none nameserver=192.168.0.1"
+govc vm.change -vm "POC-OpenShift-compute3" -e "guestinfo.afterburn.initrd.network-kargs=${IPCFG}"
