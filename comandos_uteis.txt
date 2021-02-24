@@ -19,7 +19,19 @@ generate the Kubernetes manifests for the cluster:
  
  /openshift-install create ignition-configs --dir=<installation_directory>
  
+ Watch for bootstrap complete:
+ 
+ ./openshift-install --dir=<installation_directory> wait-for bootstrap-complete --log-level=debug
+ 
+ Check certificate:
+ 
+ openssl s_client -showcerts -connect api-int.<clustername>.domain.com:22623 | openssl x509 -in /dev/stdin -noout -text
+ 
  For debugging you can use sudo crictl ps and sudo crictl logs <container_id> to inspect the state of the various components.
+ 
+ Debug deploy:
+ 
+ journalctl -b -f -u release-image.service -u bootkube.service
  
  
  
