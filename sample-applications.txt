@@ -1,0 +1,41 @@
+Examples from Git repositories
+httpd
+This example helps build and serve static content using httpd on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Apache HTTP Server container image repository.
+
+
+$ odo create httpd --git https://github.com/openshift/httpd-ex.git
+java
+This example helps build and run fat JAR Java applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Java S2I Builder image.
+
+
+$ odo create java --git https://github.com/spring-projects/spring-petclinic.git
+nodejs
+Build and run Node.js applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Node.js 8 container image.
+
+
+$ odo create nodejs --git https://github.com/openshift/nodejs-ex.git
+perl
+This example helps build and run Perl applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Perl 5.26 container image.
+
+
+$ odo create perl --git https://github.com/openshift/dancer-ex.git
+php
+This example helps build and run PHP applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the PHP 7.1 Docker image.
+
+
+$ odo create php --git https://github.com/openshift/cakephp-ex.git
+python
+This example helps build and run Python applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Python 3.6 container image.
+
+
+$ odo create python --git https://github.com/openshift/django-ex.git
+ruby
+This example helps build and run Ruby applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see Ruby 2.5 container image.
+
+
+$ odo create ruby --git https://github.com/openshift/ruby-ex.git
+wildfly
+This example helps build and run WildFly applications on CentOS 7. For more information about using this builder image, including OpenShift Container Platform considerations, see the Wildfly - CentOS Docker images for OpenShift.
+
+
+$ odo create wildfly --git https://github.com/openshift/openshift-jee-sample.git
