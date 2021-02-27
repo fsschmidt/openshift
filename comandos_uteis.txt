@@ -33,5 +33,14 @@ generate the Kubernetes manifests for the cluster:
  
  journalctl -b -f -u release-image.service -u bootkube.service
  
+ #Change Image Registry managementState
+ oc edit configs.imageregistry.operator.openshift.io/cluster
+
+managementState: Managed
+
+#non production environments only
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
+
+ 
  
  
