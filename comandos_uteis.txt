@@ -33,6 +33,12 @@ generate the Kubernetes manifests for the cluster:
  
  journalctl -b -f -u release-image.service -u bootkube.service
  
+ Test ldap/AD:
+ 
+ ldapsearch -x -H ldap://"ldapserver.example.com" -D "CN=service_account,OU=OU_SERVICE_ACCOUNT,DC=example,DC=com" \
+    -b "OU=SEARCH_BASE,DC=example,DC=com" \
+    -W '(sAMAccountName=account_example)'
+ 
  #Change Image Registry managementState
  oc edit configs.imageregistry.operator.openshift.io/cluster
 
