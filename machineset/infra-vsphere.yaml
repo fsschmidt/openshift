@@ -1,0 +1,61 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  creationTimestamp: null
+  labels:
+    machine.openshift.io/cluster-api-cluster:  <infrastructure_id> 
+  name:  <infrastructure_id>-infra
+  namespace: openshift-machine-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: <infrastructure_id> 
+      machine.openshift.io/cluster-api-machineset: <infrastructure_id>-infra
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        machine.openshift.io/cluster-api-cluster: <infrastructure_id> 
+        machine.openshift.io/cluster-api-machine-role: infra
+        machine.openshift.io/cluster-api-machine-type: infra
+        machine.openshift.io/cluster-api-machineset: <infrastructure_id>-infra
+    spec:
+      metadata:
+        creationTimestamp: null
+        labels:
+          node-role.kubernetes.io/infra: ""
+          node-role.kubernetes.io: infra
+          env: infra
+      taints:
+      - key: node-role.kubernetes.io/infra
+        effect: NoSchedule
+        value: reserved
+      - key: node-role.kubernetes.io/infra
+        effect: NoExecute
+        value: reserved
+      providerSpec:
+        value:
+          numCoresPerSocket: 2
+          diskGiB: 120
+          snapshot: ''
+          userDataSecret:
+            name: worker-user-data
+          memoryMiB: 8192
+          credentialsSecret:
+            name: vsphere-cloud-credentials
+          network:
+            devices:
+              - networkName: <vm_network_name>
+          metadata:
+            creationTimestamp: null
+          numCPUs: 8
+          kind: VSphereMachineProviderSpec
+          workspace:
+            datacenter: <vcenter_datacenter_name>
+            datastore: <vcenter_datastore_name>
+            folder: <vcenter_vm_folder_path>
+            resourcePool: <vsphere_resource_pool>
+            server: <vcenter_server_ip>
+          template: <infrastructure_id>-rhcos
+          apiVersion: machine.openshift.io/v1beta1
