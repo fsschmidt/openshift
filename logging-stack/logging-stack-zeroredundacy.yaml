@@ -46,6 +46,7 @@ spec:
     kibana:
       replicas: 1
       nodeSelector:
+      node-role.kubernetes.io/infra: ""
       env: infra      
       tolerations:
       - key: node-role.kubernetes.io/infra
