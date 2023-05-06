@@ -14,7 +14,7 @@ storage:
       overwrite: true
       contents:
         inline: |
-          pool ntp.postalis.org.br iburst
+          pool ntp.example.com iburst
           driftfile /var/lib/chrony/drift
           makestep 1.0 3
           rtcsync
